@@ -6,3 +6,7 @@ export const Container = styled.View`
   align-items: center;
   background-color: ${({ theme }) => theme.colors.main};
 `;
+
+export const Title = styled.Text`
+  color: ${({ theme }) => theme.colors.text};
+`;
