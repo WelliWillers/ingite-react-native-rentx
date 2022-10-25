@@ -13,7 +13,7 @@ import {
 } from './styles';
 import GasolinaSVG from '../../assets/gasoline.svg'
 
-interface CarProps {
+export interface CarProps {
     props: CarData
 }
 

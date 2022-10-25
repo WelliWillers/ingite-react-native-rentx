@@ -9,6 +9,7 @@ import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
 import theme from './src/styles/theme';
 
 import { Home } from './src/screens/Home';
+import { CraDetails } from './src/screens/CraDetails';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -34,12 +35,6 @@ export default function App() {
     prepare();
   }, [])
 
-  // const onLayoutRootView = useCallback(async () => {
-  //   if (appIsReady) {
-  //     await SplashScreen.hideAsync();
-  //   }
-  // }, [appIsReady]);
-
   if (!appIsReady) {
     return null;
   } else {
@@ -49,12 +44,7 @@ export default function App() {
   
   return (
     <ThemeProvider theme={theme}>
-      <StatusBar 
-        backgroundColor="transparent"
-        translucent
-        style='light'
-      />
-      <Home />
+      <CraDetails />
     </ThemeProvider>
   );
 }
