@@ -9,7 +9,8 @@ import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
 import theme from './src/styles/theme';
 
 import { Home } from './src/screens/Home';
-import { CraDetails } from './src/screens/CraDetails';
+import { CarDetails } from './src/screens/CarDetails';
+import { Scheduling } from './src/screens/Scheduling';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -40,11 +41,10 @@ export default function App() {
   } else {
     SplashScreen.hideAsync();
   }
-
   
   return (
     <ThemeProvider theme={theme}>
-      <CraDetails />
+      <Scheduling />
     </ThemeProvider>
   );
 }

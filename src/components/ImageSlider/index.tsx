@@ -13,6 +13,8 @@ interface Props {
 }
 
 export function ImageSlider({imagesUrl}: Props) {
+
+    console.log(imagesUrl[0])
   return (
     <Container>
         <StatusBar
@@ -27,7 +29,7 @@ export function ImageSlider({imagesUrl}: Props) {
         </ImageIndexes>
 
         <CarImagesWrapper>
-            <CarImage source={{uri: imagesUrl[0]}} resizeMode="contain" />
+            <CarImage source={{uri: `${imagesUrl[0]}`}} resizeMode="contain" />
         </CarImagesWrapper>
     </Container>
   );
