@@ -14,7 +14,6 @@ interface Props {
 
 export function ImageSlider({imagesUrl}: Props) {
 
-    console.log(imagesUrl[0])
   return (
     <Container>
         <StatusBar
