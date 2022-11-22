@@ -12,12 +12,14 @@ import {
     CarImage
 } from './styles';
 import GasolinaSVG from '../../assets/gasoline.svg'
+import { RectButtonProps } from 'react-native-gesture-handler';
+import { TouchableOpacityProps } from 'react-native';
 
-export interface CarProps {
-    props: CarData
+export interface CarProps extends TouchableOpacityProps{
+    data: CarData
 }
 
-interface CarData {
+export interface CarData {
     brand: string
     name: string
     rent: {
@@ -27,16 +29,16 @@ interface CarData {
     thambnail: string
 }
 
-export function Car({props}: CarProps) {
+export function Car({data, ...rest}: CarProps) {
   return (
-    <Container>
+    <Container {...rest}>
         <Details>
-            <Brand>{props.brand}</Brand>
-            <Name>{props.name}</Name>
+            <Brand>{data.brand}</Brand>
+            <Name>{data.name}</Name>
             <About>
                 <Rent>
-                    <Period>{props.rent.period}</Period>
-                    <Price>{`R$ ${props.rent.price}`}</Price>
+                    <Period>{data.rent.period}</Period>
+                    <Price>{`R$ ${data.rent.price}`}</Price>
                 </Rent>
 
                 <Type>
@@ -45,7 +47,7 @@ export function Car({props}: CarProps) {
             </About>
         </Details>
 
-        <CarImage source={{uri: props.thambnail}} resizeMode="contain" />
+        <CarImage source={{uri: data.thambnail}} resizeMode="contain" />
     </Container>
   );
 }

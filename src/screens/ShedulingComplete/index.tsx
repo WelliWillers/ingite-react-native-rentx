@@ -9,11 +9,19 @@ import {
     Message,
     Footer
 } from './styles';
-import { ConfirmButton } from '../../components/ConfirmButton';
+import { Button } from '../../components/Button';
+import theme from '../../styles/theme';
+import { useNavigation } from '@react-navigation/native';
 
 export function ShedulingComplete() {
 
     const { width } = useWindowDimensions()
+
+    const {navigate} = useNavigation()
+  
+    function handleConfirm(){
+      navigate('Home')
+    }
 
     return (
         <Container>
@@ -32,7 +40,7 @@ export function ShedulingComplete() {
             </Content>
 
             <Footer>
-                <ConfirmButton title='Ok'/>
+                <Button title="Confirmar" color={theme.colors.main} onPress={handleConfirm} />
             </Footer>
 
         </Container>

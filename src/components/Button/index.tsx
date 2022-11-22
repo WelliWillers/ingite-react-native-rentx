@@ -1,11 +1,12 @@
 import React from 'react';
+import { TouchableOpacityProps } from 'react-native';
 import { BorderlessButtonProps } from 'react-native-gesture-handler';
 import { 
     Container, 
     Title
 } from './styles';
 
-interface Props extends BorderlessButtonProps {
+interface Props extends TouchableOpacityProps {
     title: string;
     color?: string;
 }

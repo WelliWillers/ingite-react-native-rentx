@@ -1,18 +1,13 @@
-import { useCallback, useEffect, useState } from 'react';
-import { StatusBar } from 'expo-status-bar';
+import { useEffect, useState } from 'react';
 import * as SplashScreen from 'expo-splash-screen';
 import * as Font from 'expo-font';
-import { View } from 'react-native';
 import { ThemeProvider } from 'styled-components'
 import { Archivo_400Regular, Archivo_500Medium, Archivo_600SemiBold } from '@expo-google-fonts/archivo'
 import { Inter_400Regular, Inter_500Medium } from '@expo-google-fonts/inter'
 import theme from './src/styles/theme';
 
-import { Home } from './src/screens/Home';
-import { CarDetails } from './src/screens/CarDetails';
-import { Scheduling } from './src/screens/Scheduling';
-import { SchedulingDetails } from './src/screens/SchedulingDetails';
-import { ShedulingComplete } from './src/screens/ShedulingComplete';
+import { Routes } from './src/routes';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -45,8 +40,10 @@ export default function App() {
   }
   
   return (
-    <ThemeProvider theme={theme}>
-      <ShedulingComplete />
-    </ThemeProvider>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <ThemeProvider theme={theme}>
+        <Routes />
+      </ThemeProvider>
+    </GestureHandlerRootView>
   );
 }

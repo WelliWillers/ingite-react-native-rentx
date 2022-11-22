@@ -17,49 +17,56 @@ import {
 import ArrowLeftSvg from '../../assets/arrow.svg'
 import { Button } from '../../components/Button';
 import { Calendar } from '../../components/Calendar';
+import { useNavigation } from '@react-navigation/native';
 
 export function Scheduling() {
-  return (
-    <Container>
-        <StatusBar 
-            backgroundColor="transparent"
-            translucent
-            barStyle='light-content'
-        />
-        <Header>
-            <BackButton color={theme.colors.shape} onPress={() => {Alert.alert('teste')}}/>
-            <Title>
-                Escolha uma {'\n'}
-                data de inicio e{'\n'}
-                fim do aluguel
-            </Title>
+    const {goBack, navigate} = useNavigation()
+  
+    function handleConfirm(){
+      navigate('SchedulingDetails')
+    }
 
-            <RentalPeriod>
-                <DateInfo>
-                    <DateTitle>DE</DateTitle>
-                    <DateValue dateSelected>
-                        18/06/2022
-                    </DateValue>
-                </DateInfo>
+    return (
+        <Container>
+            <StatusBar 
+                backgroundColor="transparent"
+                translucent
+                barStyle='light-content'
+            />
+            <Header>
+                <BackButton color={theme.colors.shape} onPress={goBack}/>
+                <Title>
+                    Escolha uma {'\n'}
+                    data de inicio e{'\n'}
+                    fim do aluguel
+                </Title>
 
-                <ArrowLeftSvg />
-                
-                <DateInfo>
-                    <DateTitle>ATÉ</DateTitle>
-                    <DateValue dateSelected>
-                        20/06/2022
-                    </DateValue>
-                </DateInfo>
-            </RentalPeriod>
-        </Header>
+                <RentalPeriod>
+                    <DateInfo>
+                        <DateTitle>DE</DateTitle>
+                        <DateValue dateSelected>
+                            18/06/2022
+                        </DateValue>
+                    </DateInfo>
 
-        <Content>
-            <Calendar />
-        </Content>
+                    <ArrowLeftSvg />
+                    
+                    <DateInfo>
+                        <DateTitle>ATÉ</DateTitle>
+                        <DateValue dateSelected>
+                            20/06/2022
+                        </DateValue>
+                    </DateInfo>
+                </RentalPeriod>
+            </Header>
 
-        <Footer>
-            <Button title="Confirmar" color={theme.colors.main} />
-        </Footer>
-    </Container>
-  );
+            <Content>
+                <Calendar />
+            </Content>
+
+            <Footer>
+                <Button title="Confirmar" color={theme.colors.main} onPress={handleConfirm} />
+            </Footer>
+        </Container>
+    );
 }

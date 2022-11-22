@@ -6,7 +6,7 @@ interface colorProps extends RectButtonProps {
     color: string;
 }
 
-export const Container = styled(RectButton)<colorProps>`
+export const Container = styled.TouchableOpacity<colorProps>`
     width: 100%;
     padding: 20px;
     justify-content: center;

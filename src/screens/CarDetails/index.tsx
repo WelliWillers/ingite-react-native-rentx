@@ -28,12 +28,19 @@ import ExchangeSvg from '../../assets/exchange.svg'
 import PeopleSvg from '../../assets/people.svg' 
 import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
+import { useNavigation } from '@react-navigation/native';
 
 export function CarDetails() {
+  const {goBack, navigate} = useNavigation()
+
+  function handleConfirm(){
+    navigate('Scheduling')
+  }
+
   return (
     <Container>
       <Header>
-        <BackButton onPress={() => {Alert.alert('teste')}}/>
+        <BackButton onPress={goBack}/>
       </Header>
 
       <CarImages>
@@ -67,7 +74,7 @@ export function CarDetails() {
       </Content>
 
       <Footer>
-        <Button title="Confirmar" color={theme.colors.main} />
+        <Button title="Escolher período do aluguel" color={theme.colors.main} onPress={handleConfirm} />
       </Footer>
     </Container>
   );
