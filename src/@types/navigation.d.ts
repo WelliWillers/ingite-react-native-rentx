@@ -1,15 +1,12 @@
-
-// export interface GameRouteParams {
-//     id: string
-//     name: string
-//     bannerUrl: string
-// }
+import { CarDTO } from "../screens/dtos/CarDTO";
 
 export declare global {
     namespace ReactNavigation {
         interface RootParamList {
             Home: undefined;
-            CarDetails: undefined;
+            CarDetails: {
+                car: CarDTO
+            };
             Scheduling: undefined;
             SchedulingDetails: undefined;
             ShedulingComplete: undefined;

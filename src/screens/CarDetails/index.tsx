@@ -24,14 +24,25 @@ import SpeedSvg from '../../assets/speed.svg'
 import AccelerateSvg from '../../assets/acceleration.svg' 
 import ForceSvg from '../../assets/force.svg' 
 import GasolineSvg from '../../assets/gasoline.svg' 
+import EnergySvg from '../../assets/energy.svg' 
+import HybridSvg from '../../assets/hybrid.svg' 
 import ExchangeSvg from '../../assets/exchange.svg' 
 import PeopleSvg from '../../assets/people.svg' 
 import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { CarDTO } from '../dtos/CarDTO';
+import { getAccessoryIcon } from '../../utils/getAccessoriIcon';
+
+interface Params {
+  car: CarDTO
+}
 
 export function CarDetails() {
   const {goBack, navigate} = useNavigation()
+
+  const route = useRoute()
+  const { car } = route.params as Params
 
   function handleConfirm(){
     navigate('Scheduling')
@@ -40,36 +51,33 @@ export function CarDetails() {
   return (
     <Container>
       <Header>
-        <BackButton onPress={goBack}/>
+        <BackButton onPress={goBack} />
       </Header>
 
       <CarImages>
-        <ImageSlider imagesUrl={['https://png.monster/wp-content/uploads/2020/11/2018-audi-rs5-4wd-coupe-angular-front-5039562b.png', 'https://png.monster/wp-content/uploads/2020/11/2018-audi-rs5-4wd-coupe-angular-front-5039562b.png']} /> 
+        <ImageSlider imagesUrl={car.photos} /> 
       </CarImages>
 
       <Content>
         <Details>
           <Description>
-            <Brand>AUDI</Brand>
-            <Name>Name</Name>
+            <Brand>{car.brand}</Brand>
+            <Name>{car.name}</Name>
           </Description>
           <Rent>
-            <Period>Ao dia</Period>
-            <Price>R$ 580</Price>
+            <Period>{car.rent.period}</Period>
+            <Price>{`R$ ${car.rent.price}`}</Price>
           </Rent>
         </Details>
 
         <Acessories>
-          <Acessory name="380km/h" icon={SpeedSvg}/>
-          <Acessory name="3.2s" icon={AccelerateSvg}/>
-          <Acessory name="800 HP" icon={ForceSvg}/>
-          <Acessory name="Gasoline" icon={GasolineSvg}/>
-          <Acessory name="Auto" icon={ExchangeSvg}/>
-          <Acessory name="2 pessoas" icon={PeopleSvg}/>
+          {
+            car.accessories.map(acc => <Acessory key={acc.type} name={acc.name} icon={getAccessoryIcon(acc.type)}/>)
+          }
         </Acessories>
 
         <About>
-          mdhjkash dkhjgashd gkhjasgd hjagd gasjg dhjasd hjasg jdhgsahd gjahsgd jhgfygdywu gsda yusdguyawgd uysgd uygawyud gauwgd usayg duywgduysgdyuwdguysgdahjwdgusyadghjwdgyu
+          {car.about}
         </About>
       </Content>
 
