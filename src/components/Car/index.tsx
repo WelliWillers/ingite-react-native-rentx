@@ -11,8 +11,6 @@ import {
     Type,
     CarImage
 } from './styles';
-import GasolinaSVG from '../../assets/gasoline.svg'
-import { RectButtonProps } from 'react-native-gesture-handler';
 import { TouchableOpacityProps } from 'react-native';
 import { CarDTO } from '../../screens/dtos/CarDTO';
 import { getAccessoryIcon } from '../../utils/getAccessoriIcon';

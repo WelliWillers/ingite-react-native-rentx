@@ -1,5 +1,4 @@
 import React from 'react';
-import { Alert } from 'react-native';
 import { BackButton } from '../../components/BackButton';
 import { ImageSlider } from '../../components/ImageSlider';
 import { Acessory } from '../../components/Acessory';
@@ -20,14 +19,6 @@ import {
   Footer
 } from './styles';
 
-import SpeedSvg from '../../assets/speed.svg' 
-import AccelerateSvg from '../../assets/acceleration.svg' 
-import ForceSvg from '../../assets/force.svg' 
-import GasolineSvg from '../../assets/gasoline.svg' 
-import EnergySvg from '../../assets/energy.svg' 
-import HybridSvg from '../../assets/hybrid.svg' 
-import ExchangeSvg from '../../assets/exchange.svg' 
-import PeopleSvg from '../../assets/people.svg' 
 import { Button } from '../../components/Button';
 import theme from '../../styles/theme';
 import { useNavigation, useRoute } from '@react-navigation/native';
