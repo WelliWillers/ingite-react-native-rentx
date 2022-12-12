@@ -46,7 +46,7 @@ export const Content = styled.ScrollView.attrs({
     },
     showsVerticalScrollIndicator: false
 })`
-    flex: 1;
+    width: 100%;
 `;
 
 export const Footer = styled.View`

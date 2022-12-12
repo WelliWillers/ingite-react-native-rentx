@@ -1,3 +1,4 @@
+import { MarkedDateProps } from "../components/Calendar";
 import { CarDTO } from "../screens/dtos/CarDTO";
 
 export declare global {
@@ -7,8 +8,13 @@ export declare global {
             CarDetails: {
                 car: CarDTO
             };
-            Scheduling: undefined;
-            SchedulingDetails: undefined;
+            Scheduling: {
+                car: CarDTO
+            };
+            SchedulingDetails: {
+                car: CarDTO,
+                dates: {}
+            };
             ShedulingComplete: undefined;
             MyCars: undefined;
         }

@@ -22,11 +22,14 @@ import {
   CarFooterPeriod,
   CarFooterDate
 } from './styles';
+import { Load } from '../../components/Load';
 
 interface CarProps {
   id: string;
   user_id: string;
   car: CarDTO;
+  start: string;
+  end: string;
 }
 export function MyCars() {
 
@@ -72,26 +75,30 @@ export function MyCars() {
       <Content>
         <Appointement>
           <AppointementTitle>Agendamentos feitos</AppointementTitle>
-          <AppointementQuantity>{}</AppointementQuantity>
+          <AppointementQuantity>{cars.length}</AppointementQuantity>
         </Appointement>
-        <FlatList
-          data={cars}
-          keyExtractor={item => item.id}
-          showsVerticalScrollIndicator={false}
-          renderItem={({item}) => (
-            <CarWrapper>
-              <Car data={item.car}/>
-              <CarFooter>
-                <CarFooterTitle>Período</CarFooterTitle>
-                <CarFooterPeriod>
-                  <CarFooterDate>1888888</CarFooterDate>
-                  <AntDesign name="arrowright" size={20} color={theme.colors.title} style={{marginHorizontal: 10}} />
-                  <CarFooterDate>1888888</CarFooterDate>
-                </CarFooterPeriod>
-              </CarFooter>
-            </CarWrapper>
-          )}
-        />
+        {
+          loading ? <Load /> : (
+            <FlatList
+              data={cars}
+              keyExtractor={item => item.id}
+              showsVerticalScrollIndicator={false}
+              renderItem={({item}) => (
+                <CarWrapper>
+                  <Car data={item.car}/>
+                  <CarFooter>
+                    <CarFooterTitle>Período</CarFooterTitle>
+                    <CarFooterPeriod>
+                      <CarFooterDate>{item.start}</CarFooterDate>
+                      <AntDesign name="arrowright" size={20} color={theme.colors.title} style={{marginHorizontal: 10}} />
+                      <CarFooterDate>{item.end}</CarFooterDate>
+                    </CarFooterPeriod>
+                  </CarFooter>
+                </CarWrapper>
+              )}
+            />
+          ) 
+        }
       </Content>
     </Container>
   );
