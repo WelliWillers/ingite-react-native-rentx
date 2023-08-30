@@ -1,21 +1,22 @@
-import { getStatusBarHeight } from 'react-native-iphone-x-helper';
-import { RFValue } from 'react-native-responsive-fontsize';
-import styled from 'styled-components/native';
+import { getStatusBarHeight } from "react-native-iphone-x-helper";
+import { RFValue } from "react-native-responsive-fontsize";
+import styled from "styled-components/native";
 
 export const Container = styled.View`
   flex: 1;
   width: 100%;
   align-items: center;
-  background-color: ${({ theme }) => theme.colors.background_primary}; 
+  background-color: ${({ theme }) => theme.colors.background_primary};
 `;
 
 export const Header = styled.View`
   width: 100%;
-  height: 325px;
+  height: 310px;
   background-color: ${({ theme }) => theme.colors.header};
-  padding: 25px;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-bottom: 25px;
   justify-content: center;
-  padding-top: ${getStatusBarHeight() + 32}px;
 `;
 
 export const Title = styled.Text`
@@ -67,7 +68,7 @@ export const CarFooter = styled.View`
   padding: 12px;
   margin-top: -10px;
   flex-direction: row;
-  background-color: ${({ theme }) => theme.colors.background_secondary}; 
+  background-color: ${({ theme }) => theme.colors.background_secondary};
   justify-content: space-between;
 `;
 
