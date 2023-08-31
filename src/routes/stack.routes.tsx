@@ -11,6 +11,7 @@ import { SchedulingDetails } from "../screens/SchedulingDetails";
 import { ShedulingComplete } from "../screens/ShedulingComplete";
 import { MyCars } from "../screens/MyCars";
 import { Splash } from "../screens/Splash";
+import { SignIn } from "../screens/SignIn";
 
 export function StackRoutes() {
   return (
@@ -21,8 +22,9 @@ export function StackRoutes() {
         animationDuration: 200,
         presentation: "modal",
       }}
-      initialRouteName="Splash"
+      initialRouteName="SignIn"
     >
+      <Screen name="SignIn" component={SignIn} />
       <Screen name="Splash" component={Splash} />
       <Screen
         name="Home"

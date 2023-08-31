@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Alert, StatusBar } from "react-native";
+import { StatusBar } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import theme from "../../styles/theme";
 import {
@@ -48,14 +48,10 @@ export function Scheduling() {
   const { car } = route.params as Params;
 
   function handleConfirmRental() {
-    if (!rentalPeriod.startFormated || !rentalPeriod.endFormated) {
-      Alert.alert("É preciso selecionar uma data.");
-    } else {
-      navigate("SchedulingDetails", {
-        car,
-        dates: Object.keys(markedDate),
-      });
-    }
+    navigate("SchedulingDetails", {
+      car,
+      dates: Object.keys(markedDate),
+    });
   }
 
   function handleChangeDate(date: DayProps) {
@@ -124,6 +120,7 @@ export function Scheduling() {
           title="Confirmar"
           color={theme.colors.main}
           onPress={handleConfirmRental}
+          enabled={!!rentalPeriod.startFormated}
         />
       </Footer>
     </Container>
