@@ -262,19 +262,22 @@
     {
       "id": "535e8de8-721b-4bac-8b72-7d29be7da467",
       "unavailable_dates": {
-        "0": "2023-08-30",
-        "1": "2023-08-31",
-        "2": "2022-12-08",
-        "3": "2022-12-09",
-        "4": "2022-12-10",
-        "5": "2022-12-11"
+        "0": "2023-09-13",
+        "1": "2023-09-14",
+        "2": "2023-09-15",
+        "3": "2023-09-16",
+        "4": "2023-09-17",
+        "5": "2023-09-18",
+        "6": "2023-09-19",
+        "7": "2023-09-20",
+        "8": "2023-09-21"
       }
     },
     {
       "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
       "unavailable_dates": {
-        "0": "2022-12-29",
-        "1": "2022-12-30",
+        "0": "2023-09-22",
+        "1": "2023-09-23",
         "2": "2022-12-31",
         "3": "2021-06-01",
         "4": "2021-06-02",
@@ -479,6 +482,103 @@
       "start": "30/08/2023",
       "end": "31/08/2023",
       "id": 3
+    },
+    {
+      "user_id": 1,
+      "car": {
+        "id": "535e8de8-721b-4bac-8b72-7d29be7da467",
+        "brand": "Audi",
+        "name": "RS 5 Coupé",
+        "about": "O carro ainda tem sistema de tração nas quatro rodas Quattro com diferencial traseiro esportivo de série. De acordo com a Audi, ele faz o mesmo em 3,8 segundos na Sportback.",
+        "rent": {
+          "period": "Ao dia",
+          "price": 120
+        },
+        "fuel_type": "electric",
+        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/1.png",
+        "accessories": [
+          {
+            "type": "speed",
+            "name": "250km/h"
+          },
+          {
+            "type": "acceleration",
+            "name": "3.8s"
+          },
+          {
+            "type": "turning_diameter",
+            "name": "800 HP"
+          },
+          {
+            "type": "electric_motor",
+            "name": "Elétrico"
+          },
+          {
+            "type": "exchange",
+            "name": "Auto"
+          },
+          {
+            "type": "seats",
+            "name": "5 pessoas"
+          }
+        ],
+        "photos": [
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/1.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/2.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/3.png"
+        ]
+      },
+      "start": "13/09/2023",
+      "end": "21/09/2023",
+      "id": 4
+    },
+    {
+      "user_id": 1,
+      "car": {
+        "id": "ffb71f55-818a-48b1-b7d2-2efc406ede25",
+        "brand": "Porsche",
+        "name": "Panamera",
+        "about": "O Panamera é um automóvel de luxo coupé com porte grande. Tem motorização dianteira V6 e V8. A tração é integral com uma caixa PDK de sete mudanças e dupla embreagem.",
+        "rent": {
+          "period": "Ao dia",
+          "price": 340
+        },
+        "fuel_type": "gasoline_motor",
+        "thumbnail": "https://storage.googleapis.com/golden-wind/ignite/react-native/thumbnails/2.png",
+        "accessories": [
+          {
+            "type": "speed",
+            "name": "315km/h"
+          },
+          {
+            "type": "acceleration",
+            "name": "2.9s"
+          },
+          {
+            "type": "turning_diameter",
+            "name": "700 HP"
+          },
+          {
+            "type": "gasoline_motor",
+            "name": "Gasoline"
+          },
+          {
+            "type": "exchange",
+            "name": "Auto"
+          },
+          {
+            "type": "seats",
+            "name": "4 pessoas"
+          }
+        ],
+        "photos": [
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/4.png",
+          "https://storage.googleapis.com/golden-wind/ignite/react-native/images/5.png"
+        ]
+      },
+      "start": "22/09/2023",
+      "end": "23/09/2023",
+      "id": 5
     }
   ]
 }
