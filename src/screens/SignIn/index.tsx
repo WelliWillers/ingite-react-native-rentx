@@ -13,10 +13,14 @@ import { Input } from "../../components/Input";
 import { PasswordInput } from "../../components/PasswordInput";
 import * as yup from "yup";
 import { useNavigation } from "@react-navigation/native";
+import { useAuth } from "../../hooks/auth";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigation();
+
+  const { singIn } = useAuth();
 
   async function handleSingIn() {
     try {
@@ -29,7 +33,10 @@ export function SignIn() {
       });
 
       await schema.validate({ email, password });
-      return Alert.alert("Tudo ok");
+      await singIn({ email, password });
+      // .then(() => {
+      //   // navigate.navigate("Home");
+      // });
     } catch (error) {
       if (error instanceof yup.ValidationError) {
         return Alert.alert("Opa", error.message);
@@ -38,8 +45,6 @@ export function SignIn() {
       }
     }
   }
-
-  const navigate = useNavigation();
 
   function handleNewAccount() {
     navigate.navigate("SignUpFirstStep");

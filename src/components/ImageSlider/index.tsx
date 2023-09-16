@@ -11,7 +11,10 @@ import { FlatList } from "react-native-gesture-handler";
 import { Bullet } from "../Bullet";
 
 interface Props {
-  imagesUrl: string[];
+  imagesUrl: {
+    id: string;
+    photo: string;
+  }[];
 }
 
 interface ChangedImageProps {
@@ -34,17 +37,17 @@ export function ImageSlider({ imagesUrl }: Props) {
         barStyle="dark-content"
       />
       <ImageIndexes>
-        {imagesUrl.map((_, index) => (
-          <Bullet key={String(index)} active={index === imageIndex} />
+        {imagesUrl.map((item, index) => (
+          <Bullet key={item.id} active={index === imageIndex} />
         ))}
       </ImageIndexes>
 
       <FlatList
         data={imagesUrl}
-        keyExtractor={(key) => key}
+        keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
           <CarImagesWrapper>
-            <CarImage source={{ uri: `${item}` }} resizeMode="contain" />
+            <CarImage source={{ uri: `${item.photo}` }} resizeMode="contain" />
           </CarImagesWrapper>
         )}
         horizontal
