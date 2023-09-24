@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Container, Footer, Header, SubTitle, Title, Form } from "./styles";
 import {
   KeyboardAvoidingView,
@@ -14,6 +14,7 @@ import { PasswordInput } from "../../components/PasswordInput";
 import * as yup from "yup";
 import { useNavigation } from "@react-navigation/native";
 import { useAuth } from "../../hooks/auth";
+import { database } from "../../database";
 
 export function SignIn() {
   const [email, setEmail] = useState("");
@@ -21,6 +22,18 @@ export function SignIn() {
   const navigate = useNavigation();
 
   const { singIn } = useAuth();
+
+  useEffect(() => {
+    async function loadData() {
+      const userCollection = database.get("users");
+
+      const users = await userCollection.query().fetch();
+
+      console.log(users);
+    }
+
+    loadData();
+  }, []);
 
   async function handleSingIn() {
     try {

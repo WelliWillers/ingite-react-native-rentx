@@ -1,4 +1,4 @@
-package com.rentx;
+package com.wellington_willers.rentx;
 
 import android.os.Build;
 import android.os.Bundle;

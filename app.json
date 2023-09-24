@@ -9,6 +9,30 @@
     "splash": {
       "image": "./assets/splash.png",
       "backgroundColor": "#1B1B1F"
+    },
+    "plugins": [
+      [
+        "@morrowdigital/watermelondb-expo-plugin",
+        {
+          "databases": [
+            "morrow.db"
+          ]
+        }
+      ],
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "kotlinVersion": "1.6.10"
+          }
+        }
+      ]
+    ],
+    "android": {
+      "package": "com.wellington_willers.rentx"
+    },
+    "ios": {
+      "bundleIdentifier": "iosrentx"
     }
   }
 }

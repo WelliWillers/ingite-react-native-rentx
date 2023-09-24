@@ -1,4 +1,4 @@
-package com.rentx.newarchitecture.modules;
+package com.wellington_willers.rentx.newarchitecture.modules;
 
 import com.facebook.jni.HybridData;
 import com.facebook.react.ReactPackage;
