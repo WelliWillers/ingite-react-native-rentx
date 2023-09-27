@@ -20,18 +20,28 @@ export function Home() {
   }
 
   useEffect(() => {
+    let isMouted = true;
+
     async function fetchCars() {
       await api
         .get("/cars")
         .then((res) => {
-          setCars(res.data);
+          if (isMouted) {
+            setCars(res.data);
+          }
         })
         .catch((Error: AxiosError) => {
           console.error(Error);
         })
         .finally(() => {
-          setLoading(false);
+          if (isMouted) {
+            setLoading(false);
+          }
         });
+
+      return () => {
+        isMouted = false;
+      };
     }
 
     fetchCars();
