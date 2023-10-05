@@ -8,7 +8,7 @@ import { Container, IconContainer, InputText } from "./styles";
 
 interface InputProps extends TextInputProps {
   iconName: React.ComponentProps<typeof Feather>["name"];
-  value: string;
+  value?: string;
 }
 
 export function PasswordInput({ value, iconName, ...rest }: InputProps) {
@@ -39,6 +39,7 @@ export function PasswordInput({ value, iconName, ...rest }: InputProps) {
         onFocus={handleIsFocused}
         onBlur={handleIsBlured}
         secureTextEntry={!show}
+        autoCorrect={false}
         {...rest}
       />
 

@@ -27,6 +27,8 @@ interface SignInCredential {
 interface AuthContextData {
   user: UserProps;
   singIn: (credencials: SignInCredential) => Promise<void>;
+  signOut: () => Promise<void>;
+  updateUser: (user: UserProps) => Promise<void>;
 }
 
 interface AuthProviderProps {
@@ -68,6 +70,40 @@ function AuthProvider({ children }: AuthProviderProps) {
     }
   }
 
+  async function signOut() {
+    try {
+      const userCollection = database.get<User>("users");
+
+      await database.action(async () => {
+        const userSelected = await userCollection.find(data.id);
+
+        await userSelected.destroyPermanently();
+      });
+
+      setData({} as UserProps);
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async function updateUser(user: UserProps) {
+    try {
+      const userCollection = database.get<User>("users");
+
+      await database.action(async () => {
+        const userSelected = await userCollection.find(data.id);
+
+        await userSelected.update((userData) => {
+          userData.name = user.name;
+          userData.driver_license = user.driver_license;
+          userData.avatar = user.avatar;
+        });
+      });
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
   useEffect(() => {
     async function loadUserData() {
       const userCollection = database.get<User>("users");
@@ -92,6 +128,8 @@ function AuthProvider({ children }: AuthProviderProps) {
     <AuthContext.Provider
       value={{
         singIn,
+        signOut,
+        updateUser,
         user: data,
       }}
     >
