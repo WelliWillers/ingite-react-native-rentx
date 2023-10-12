@@ -28,10 +28,12 @@ import { useBottomTabBarHeight } from "@react-navigation/bottom-tabs";
 import { PasswordInput } from "../../components/PasswordInput";
 import { useAuth } from "../../hooks/auth";
 import { Button } from "../../components/Button";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export function Profile() {
   const { user, signOut, updateUser } = useAuth();
   const theme = useTheme();
+  const netInfo = useNetInfo();
   const { goBack } = useNavigation();
 
   const [option, setOption] = useState<"dataEdit" | "passwordEdit">("dataEdit");
@@ -154,14 +156,16 @@ export function Profile() {
                 <OptionTitle active={option === "dataEdit"}>Dados</OptionTitle>
               </Option>
 
-              <Option
-                onPress={() => setOption("passwordEdit")}
-                active={option === "passwordEdit"}
-              >
-                <OptionTitle active={option === "passwordEdit"}>
-                  Trocar senha
-                </OptionTitle>
-              </Option>
+              {netInfo.isConnected === true && (
+                <Option
+                  onPress={() => setOption("passwordEdit")}
+                  active={option === "passwordEdit"}
+                >
+                  <OptionTitle active={option === "passwordEdit"}>
+                    Trocar senha
+                  </OptionTitle>
+                </Option>
+              )}
             </Options>
 
             {option === "dataEdit" ? (

@@ -21,7 +21,7 @@ import { useNavigation, useRoute } from "@react-navigation/native";
 import { generateIntervalDate } from "../../components/Calendar/generateInterval";
 import { format } from "date-fns";
 import { getPlatformDate } from "../../components/Calendar/getPlatformDate";
-import { CarDTO } from "../dtos/CarDTO";
+import { Car as ModelCar } from "../../database/model/Car";
 
 interface RentalPeriod {
   startFormated: string;
@@ -29,7 +29,7 @@ interface RentalPeriod {
 }
 
 interface Params {
-  car: CarDTO;
+  car: ModelCar;
 }
 
 export function Scheduling() {

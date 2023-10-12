@@ -62,6 +62,13 @@ export const Price = styled.Text`
   font-size: ${RFValue(25)}px;
 `;
 
+export const OfflineInfo = styled.Text`
+  font-family: ${({ theme }) => theme.fonts.primary_400};
+  color: ${({ theme }) => theme.colors.main};
+  font-size: ${RFValue(10)}px;
+  text-align: center;
+`;
+
 export const Acessories = styled.View`
   width: 100%;
   flex-direction: row;

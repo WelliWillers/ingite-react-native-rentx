@@ -9,43 +9,70 @@ import { api } from "../../services/api";
 import { AxiosError } from "axios";
 import { CarDTO } from "../dtos/CarDTO";
 import { Load } from "../../components/Load";
+import { useNetInfo } from "@react-native-community/netinfo";
+
+import { synchronize } from "@nozbe/watermelondb/sync";
+import { database } from "../../database";
+import { Car as ModelCar } from "../../database/model/Car";
 
 export function Home() {
   const { navigate } = useNavigation();
-  const [cars, setCars] = useState<CarDTO[]>();
+  const [cars, setCars] = useState<ModelCar[]>([]);
   const [loading, setLoading] = useState(true);
 
-  function handleShowCarDetails(car: CarDTO) {
+  const netInfo = useNetInfo();
+
+  function handleShowCarDetails(car: ModelCar) {
     navigate("CarDetails", { car });
+  }
+
+  async function offlineSinchronize() {
+    await synchronize({
+      database,
+      pullChanges: async ({ lastPulledAt }) => {
+        const response = await api.get(
+          `/cars/sync/pull?lastPulledVersion=${lastPulledAt || 0}`
+        );
+
+        const { changes, latestVersion } = response.data;
+
+        return { changes, timestamp: latestVersion };
+      },
+      pushChanges: async ({ changes }) => {
+        const user = changes.users;
+
+        await api.post("/users/sync", user);
+      },
+    });
   }
 
   useEffect(() => {
     let isMouted = true;
 
     async function fetchCars() {
-      await api
-        .get("/cars")
-        .then((res) => {
-          if (isMouted) {
-            setCars(res.data);
-          }
-        })
-        .catch((Error: AxiosError) => {
-          console.error(Error);
-        })
-        .finally(() => {
-          if (isMouted) {
-            setLoading(false);
-          }
-        });
+      try {
+        const carCollection = database.get<ModelCar>("cars");
+        const cars = await carCollection.query().fetch();
 
-      return () => {
-        isMouted = false;
-      };
+        if (isMouted) {
+          setCars(cars);
+        }
+      } catch (error) {
+      } finally {
+        if (isMouted) {
+          setLoading(false);
+        }
+      }
     }
 
     fetchCars();
   }, []);
+
+  useEffect(() => {
+    if (netInfo.isConnected === true) {
+      offlineSinchronize();
+    }
+  }, [netInfo.isConnected]);
 
   return (
     <Container>

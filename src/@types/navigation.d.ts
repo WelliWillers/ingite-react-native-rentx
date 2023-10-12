@@ -1,5 +1,5 @@
 import { MarkedDateProps } from "../components/Calendar";
-import { CarDTO } from "../screens/dtos/CarDTO";
+import { Car as ModelCar } from "../database/model/Car";
 
 export declare global {
   namespace ReactNavigation {
@@ -15,13 +15,13 @@ export declare global {
         };
       };
       CarDetails: {
-        car: CarDTO;
+        car: ModelCar;
       };
       Scheduling: {
-        car: CarDTO;
+        car: ModelCar;
       };
       SchedulingDetails: {
-        car: CarDTO;
+        car: ModelCar;
         dates: {};
       };
       Confirmation: {

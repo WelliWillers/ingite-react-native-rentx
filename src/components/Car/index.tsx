@@ -12,15 +12,17 @@ import {
   CarImage,
 } from "./styles";
 import { TouchableOpacityProps } from "react-native";
-import { CarDTO } from "../../screens/dtos/CarDTO";
+import { Car as CarModel } from "../../database/model/Car";
 import { getAccessoryIcon } from "../../utils/getAccessoriIcon";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 export interface CarProps extends TouchableOpacityProps {
-  data: CarDTO;
+  data: CarModel;
 }
 
 export function Car({ data, ...rest }: CarProps) {
   const MotorIcon = getAccessoryIcon(data.fuel_type);
+  const netInfo = useNetInfo();
   return (
     <Container {...rest}>
       <Details>
@@ -29,7 +31,9 @@ export function Car({ data, ...rest }: CarProps) {
         <About>
           <Rent>
             <Period>{data.period}</Period>
-            <Price>{`R$ ${data.price}`}</Price>
+            <Price>{`R$ ${
+              netInfo.isConnected === true ? data.price : "..."
+            }`}</Price>
           </Rent>
           <Type>
             <MotorIcon />

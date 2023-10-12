@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { Alert } from "react-native";
 import { BackButton } from "../../components/BackButton";
 import { ImageSlider } from "../../components/ImageSlider";
 import { Acessory } from "../../components/Acessory";
@@ -29,12 +28,6 @@ import {
   RentalPriceTotal,
 } from "./styles";
 
-import SpeedSvg from "../../assets/speed.svg";
-import AccelerateSvg from "../../assets/acceleration.svg";
-import ForceSvg from "../../assets/force.svg";
-import GasolineSvg from "../../assets/gasoline.svg";
-import ExchangeSvg from "../../assets/exchange.svg";
-import PeopleSvg from "../../assets/people.svg";
 import { Button } from "../../components/Button";
 import theme from "../../styles/theme";
 import { Feather } from "@expo/vector-icons";
@@ -45,6 +38,7 @@ import { getAccessoryIcon } from "../../utils/getAccessoriIcon";
 import { format } from "date-fns";
 import { getPlatformDate } from "../../components/Calendar/getPlatformDate";
 import { api } from "../../services/api";
+import { useNetInfo } from "@react-native-community/netinfo";
 
 interface Params {
   car: CarDTO;
@@ -64,30 +58,22 @@ export function SchedulingDetails() {
   const { navigate, goBack } = useNavigation();
   const route = useRoute();
   const { car, dates } = route.params as Params;
+  const [carUpdated, setCarUpdated] = useState<CarDTO>({} as CarDTO);
+
+  const netInfo = useNetInfo();
+
   const [load, setLoad] = useState(false);
 
   async function handleConfirmRental() {
     setLoad(true);
-    const response = await api.get(`/schedules_bycars/${car.id}`);
-    const unavailable_dates = {
-      ...response.data.unavailable_dates,
-      ...dates,
-    };
-
-    api.post(`/schedules_byuser`, {
-      user_id: 1,
-      car,
-      start: format(getPlatformDate(new Date(dates[0])), "dd/MM/yyyy"),
-      end: format(
-        getPlatformDate(new Date(dates[dates.length - 1])),
-        "dd/MM/yyyy"
-      ),
-    });
 
     await api
-      .put(`/schedules_bycars/${car.id}`, {
-        id: car.id,
-        unavailable_dates,
+      .post(`/rentals`, {
+        user_id: 1,
+        car_id: car.id,
+        start_date: new Date(dates[0]),
+        end_date: new Date(dates[dates.length - 1]),
+        total: rentalTotal,
       })
       .then(() => {
         navigate("Confirmation", {
@@ -117,6 +103,18 @@ export function SchedulingDetails() {
     });
   }, []);
 
+  useEffect(() => {
+    async function fetchCarUpdated() {
+      const response = await api.get(`/cars/${car.id}`);
+
+      setCarUpdated(response.data);
+    }
+
+    if (netInfo.isConnected === true) {
+      fetchCarUpdated();
+    }
+  }, [netInfo.isConnected]);
+
   return (
     <Container>
       <Header>
@@ -124,7 +122,13 @@ export function SchedulingDetails() {
       </Header>
 
       <CarImages>
-        <ImageSlider imagesUrl={car.photos} />
+        <ImageSlider
+          imagesUrl={
+            !!carUpdated.photos
+              ? carUpdated.photos
+              : [{ id: car.thumbnail, photo: car.thumbnail }]
+          }
+        />
       </CarImages>
 
       <Content>
@@ -135,19 +139,23 @@ export function SchedulingDetails() {
           </Description>
           <Rent>
             <Period>{car.period}</Period>
-            <Price>{`R$ ${car.price}`}</Price>
+            <Price>{`R$ ${
+              netInfo.isConnected === true ? car.price : "..."
+            }`}</Price>
           </Rent>
         </Details>
 
-        <Acessories>
-          {car.accessories.map((acc) => (
-            <Acessory
-              key={acc.type}
-              name={acc.name}
-              icon={getAccessoryIcon(acc.type)}
-            />
-          ))}
-        </Acessories>
+        {!!carUpdated.accessories && (
+          <Acessories>
+            {carUpdated.accessories.map((acc) => (
+              <Acessory
+                key={acc.type}
+                name={acc.name}
+                icon={getAccessoryIcon(acc.type)}
+              />
+            ))}
+          </Acessories>
+        )}
 
         <RentalPeriod>
           <CalendarIcon>
